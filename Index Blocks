@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+#define MAX_BLOCKS 100
+
+// Function to read file blocks using the index block
+void readFileBlocks(int indexBlock[], int numBlocks) {
+    printf("Reading file blocks using the index block:\n");
+    for (int i = 0; i < numBlocks; i++) {
+        printf("Block %d: %d\n", i + 1, indexBlock[i]);
+    }
+}
+
+int main() {
+    int numBlocks;
+
+    printf("Enter the number of file blocks: ");
+    scanf("%d", &numBlocks);
+
+    if (numBlocks <= 0 || numBlocks > MAX_BLOCKS) {
+        printf("Invalid number of file blocks.\n");
+        return 1;
+    }
+
+    int indexBlock[MAX_BLOCKS];
+
+    // Input index block pointers
+    printf("Enter pointers for %d blocks in the index block:\n", numBlocks);
+    for (int i = 0; i < numBlocks; i++) {
+        scanf("%d", &indexBlock[i]);
+    }
+
+    // Simulate file allocation strategy using the index block
+    readFileBlocks(indexBlock, numBlocks);
+
+    return 0;
+}
