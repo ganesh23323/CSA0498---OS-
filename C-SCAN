@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void cscan(int requests[], int n, int head, int size) {
+    int totalHeadMovement = 0;
+    int maxCylinder = size - 1;
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (requests[j] > requests[j + 1]) {
+                int temp = requests[j];
+                requests[j] = requests[j + 1];
+                requests[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("%d -> ", head);
+    for (int i = head; i <= maxCylinder; i++) {
+        if (i == maxCylinder) {
+            totalHeadMovement += i - head;
+            head = 0;
+            printf("%d -> ", i);
+            break;
+        }
+        if (i == requests[n - 1]) {
+            totalHeadMovement += i - head;
+            head = i;
+            printf("%d -> ", i);
+            break;
+        }
+    }
+
+    for (int i = 0; i < head; i++) {
+        totalHeadMovement += head - i;
+        head = i;
+        printf("%d -> ", i);
+    }
+
+    printf("\nTotal head movement = %d\n", totalHeadMovement);
+}
+
+int main() {
+    int n, head, size;
+
+    printf("Enter the number of requests: ");
+    scanf("%d", &n);
+
+    int requests[n];
+
+    printf("Enter the request order:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &requests[i]);
+    }
+
+    printf("Enter the current head position: ");
+    scanf("%d", &head);
+
+    printf("Enter the disk size: ");
+    scanf("%d", &size);
+    cscan(requests, n, head, size);
+
+    return 0;
+}
