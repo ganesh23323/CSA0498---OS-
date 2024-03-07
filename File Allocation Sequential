@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+#define MAX_RECORDS 100
+
+// Function to read records sequentially
+void readRecords(int records[], int numRecords) {
+    printf("Reading records sequentially:\n");
+    for (int i = 0; i < numRecords; i++) {
+        printf("Record %d: %d\n", i + 1, records[i]);
+    }
+}
+
+int main() {
+    int numRecords;
+
+    printf("Enter the number of records: ");
+    scanf("%d", &numRecords);
+
+    if (numRecords <= 0 || numRecords > MAX_RECORDS) {
+        printf("Invalid number of records.\n");
+        return 1;
+    }
+
+    int records[MAX_RECORDS];
+
+    // Input records
+    printf("Enter %d records:\n", numRecords);
+    for (int i = 0; i < numRecords; i++) {
+        scanf("%d", &records[i]);
+    }
+
+    // Simulate file allocation strategy
+    readRecords(records, numRecords);
+
+    return 0;
+}
